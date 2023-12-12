@@ -1,7 +1,5 @@
 package com.example.promorder
 
-import android.app.Activity
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -9,7 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.promorder.room.DatabaseProvider
 import com.example.promorder.room.RoomDb
-import com.example.promorder.room.UserEntity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AdminActivity : AppCompatActivity() {
@@ -20,12 +17,8 @@ class AdminActivity : AppCompatActivity() {
         setContentView(R.layout.activity_admin)
 
         db = DatabaseProvider.getDatabase(applicationContext)
-        val recyclerView: RecyclerView = findViewById(R.id.recProd)
-        Thread{
-            val selectProdList=db.userDao().selectProd()
-            val adapter = AdapterProd(selectProdList)
-            recyclerView.adapter = adapter
-        }.start()
+
+
         val bottomNav:BottomNavigationView = findViewById(R.id.bottomNav)
         bottomNav.setOnNavigationItemSelectedListener{
             item ->

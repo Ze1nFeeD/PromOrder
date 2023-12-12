@@ -35,7 +35,6 @@ class FragProdAdd : Fragment() {
             lifecycleScope.launch {
                 db.ProductDao().insertProduct(
                     ProductEntity(
-                        id,
                         nameproduct = nameproduct.text.toString(),
                         countproduct = countproduct.text.toString(),
                         priceproduct = priceproduct.text.toString()
