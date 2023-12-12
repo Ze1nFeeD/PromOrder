@@ -12,27 +12,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_margin="20dp"
-            >
-        <TextView
-            android:id="@+id/nameprod"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:textSize="20sp"
-            android:text="Товар1"
-            />
-                <TextView
 
-                    android:id="@+id/countprod"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="20шт"
-                    android:textSize="20sp"
-                    />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nameprod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Товар1"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/countprod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="20шт"
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-black"
+                android:text="180000Р"
+                android:textSize="17dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

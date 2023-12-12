@@ -1,11 +1,10 @@
 package com.example.promorder.room
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
-
+@Dao
 interface ProductDao {
-    //    @Query("SELECT * FROM users")
-//    fun getAllUsers(): List<UserEntity>
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    suspend fun insertProduct(userEntity: UserEntity)
+    suspend fun insertProduct(productEntity: ProductEntity)
 }

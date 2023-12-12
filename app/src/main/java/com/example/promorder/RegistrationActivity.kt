@@ -37,7 +37,7 @@ class RegistrationActivity : AppCompatActivity() {
                         nameorg = nameorg.text.toString(),
                         inn = inn.text.toString(),
                         ogrn = ogrn.text.toString(),
-                        role = 1
+                        role = 0
                     )
            )    }
                 catch (e:Exception)
