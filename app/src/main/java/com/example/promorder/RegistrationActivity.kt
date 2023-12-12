@@ -1,5 +1,6 @@
 package com.example.promorder
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -28,23 +29,30 @@ class RegistrationActivity : AppCompatActivity() {
 
         btnReg.setOnClickListener {
             lifecycleScope.launch {
-                try
-                {
-                db.userDao().insertUser(
-                    UserEntity(
-                        name = username.text.toString(),
-                        password = password.text.toString(),
-                        nameorg = nameorg.text.toString(),
-                        inn = inn.text.toString(),
-                        ogrn = ogrn.text.toString(),
-                        role = 0
+                try {
+                    db.userDao().insertUser(
+                        UserEntity(
+                            name = username.text.toString(),
+                            password = password.text.toString(),
+                            nameorg = nameorg.text.toString(),
+                            inn = inn.text.toString(),
+                            ogrn = ogrn.text.toString(),
+                            role = 0
+                        )
                     )
-           )    }
-                catch (e:Exception)
-                {
-                  Toast.makeText(this@RegistrationActivity,"Не уникальный логин",Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@RegistrationActivity, MainActivity::class.java))
+                } catch (e: Exception) {
+                    Toast.makeText(
+                        this@RegistrationActivity,
+                        "Не уникальный логин",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
+        }
+        val btncan:Button = findViewById(R.id.btnCan)
+        btncan.setOnClickListener {
+            startActivity(Intent(this@RegistrationActivity, MainActivity::class.java))
         }
     }
 }

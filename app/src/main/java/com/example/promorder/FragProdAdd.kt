@@ -1,6 +1,7 @@
 package com.example.promorder
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
 import com.example.promorder.room.DatabaseProvider
 import com.example.promorder.room.ProductEntity
@@ -41,6 +43,28 @@ class FragProdAdd : Fragment() {
                     )
                 )
             }
+
+            val newFragment: Fragment = AdminWindowProduct()
+
+            val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+            transaction.replace(
+                com.example.promorder.R.id.container,
+                newFragment
+            )
+
+            transaction.commit()
+        }
+        val btncanadd:Button = view.findViewById(R.id.btncanadd)
+        btncanadd.setOnClickListener {
+            val newFragment: Fragment = AdminWindowProduct()
+
+            val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+            transaction.replace(
+                com.example.promorder.R.id.container,
+                newFragment
+            )
+
+            transaction.commit()
         }
         return view
     }
