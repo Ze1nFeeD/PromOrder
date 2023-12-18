@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface ProductDao {
@@ -14,4 +15,6 @@ interface ProductDao {
 @Query("DELETE  FROM products WHERE id=:id")
 suspend fun deleteProd(id: String): Int
 
+@Query("UPDATE products SET nameproduct =:nameproduct, countproduct =:countprod,priceproduct =:priceprod WHERE id = :idprod")
+suspend fun updateProd(nameproduct: String,countprod: String, priceprod: String, idprod: Int): Int
 }

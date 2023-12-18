@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
 import com.example.promorder.room.DatabaseProvider
@@ -30,29 +31,55 @@ class FragProdAdd : Fragment() {
         db = DatabaseProvider.getDatabase(requireContext())
         val btnaddprod: Button = view.findViewById(R.id.btnAddProd)
 
+        var editeModeProd = false
+        val arguments = arguments
         val nameproduct: EditText = view.findViewById(R.id.nameprodadd)
         val countproduct: EditText = view.findViewById(R.id.countprodadd)
         val priceproduct: EditText = view.findViewById(R.id.priceprodadd)
+
+        if (arguments != null) {
+            nameproduct.setText(arguments.getString("nameprod"))
+            countproduct.setText(arguments.getString("countprod"))
+            priceproduct.setText(arguments.getString("priceprod"))
+            editeModeProd = true
+        }
+
         btnaddprod.setOnClickListener {
-            lifecycleScope.launch {
-                db.ProductDao().insertProduct(
-                    ProductEntity(
-                        nameproduct = nameproduct.text.toString(),
-                        countproduct = countproduct.text.toString(),
-                        priceproduct = priceproduct.text.toString()
-                    )
+            try {
+
+
+                lifecycleScope.launch {
+                    if (editeModeProd) {
+                        db.ProductDao().updateProd(
+                            nameproduct = nameproduct.text.toString(),
+                            countprod = countproduct.text.toString(),
+                            priceprod = priceproduct.text.toString(),
+                            idprod = arguments!!.getInt("idprod")
+                        )
+                    } else {
+                        db.ProductDao().insertProduct(
+                            ProductEntity(
+                                nameproduct = nameproduct.text.toString(),
+                                countproduct = countproduct.text.toString(),
+                                priceproduct = priceproduct.text.toString()
+                            )
+                        )
+                    }
+                }
+                val newFragment: Fragment = AdminWindowProduct()
+
+                val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+                transaction.replace(
+                    com.example.promorder.R.id.container,
+                    newFragment
                 )
+
+                transaction.commit()
             }
+            catch (e: Exception)
+            {
 
-            val newFragment: Fragment = AdminWindowProduct()
-
-            val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
-            transaction.replace(
-                com.example.promorder.R.id.container,
-                newFragment
-            )
-
-            transaction.commit()
+            }
         }
         val btncanadd:Button = view.findViewById(R.id.btncanadd)
         btncanadd.setOnClickListener {

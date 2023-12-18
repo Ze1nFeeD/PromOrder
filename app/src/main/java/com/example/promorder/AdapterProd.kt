@@ -1,10 +1,12 @@
 package com.example.promorder
 
 import android.app.AlertDialog
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.RecyclerView
@@ -43,8 +45,23 @@ class AdapterProd(private val dataList: List<ProductEntity>) : RecyclerView.Adap
             val alertDialog = AlertDialog.Builder(holder.itemView.context)
                 .setTitle("Выберите действие")
                 .setPositiveButton("Изменить") { dialog, which ->
-                    // Код для обработки действия "Изменить"
+                    val fragmentManager = (holder.itemView.context as AppCompatActivity).supportFragmentManager
+                    val fragmentTransaction = fragmentManager.beginTransaction()
+                    val newFragment = FragProdAdd() // замените YourNewFragment на ваш собственный фрагмент
 
+
+                    val args = Bundle()
+
+                    args.putInt("idprod", item.id)
+                    args.putString("nameprod", item.nameproduct.toString())
+                    args.putString("countprod", item.countproduct.toString())
+                    args.putString("priceprod", item.priceproduct.toString())
+
+                    newFragment.arguments = args
+
+                    fragmentTransaction.replace(R.id.container, newFragment) // замените R.id.fragment_container на ID вашего контейнера фрагментов
+                    fragmentTransaction.addToBackStack(null) // добавляем в back stack, чтобы можно было вернуться к предыдущему фрагменту
+                    fragmentTransaction.commit()
                 }
                 .setNegativeButton("Удалить") { dialog, which ->
                     // Код для обработки действия "Удалить"
