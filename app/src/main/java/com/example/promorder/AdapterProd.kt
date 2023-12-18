@@ -47,7 +47,7 @@ class AdapterProd(private val dataList: List<ProductEntity>) : RecyclerView.Adap
                 .setPositiveButton("Изменить") { dialog, which ->
                     val fragmentManager = (holder.itemView.context as AppCompatActivity).supportFragmentManager
                     val fragmentTransaction = fragmentManager.beginTransaction()
-                    val newFragment = FragProdAdd() // замените YourNewFragment на ваш собственный фрагмент
+                    val newFragment = FragProdAdd()
 
 
                     val args = Bundle()
@@ -59,8 +59,8 @@ class AdapterProd(private val dataList: List<ProductEntity>) : RecyclerView.Adap
 
                     newFragment.arguments = args
 
-                    fragmentTransaction.replace(R.id.container, newFragment) // замените R.id.fragment_container на ID вашего контейнера фрагментов
-                    fragmentTransaction.addToBackStack(null) // добавляем в back stack, чтобы можно было вернуться к предыдущему фрагменту
+                    fragmentTransaction.replace(R.id.container, newFragment)
+                    fragmentTransaction.addToBackStack(null)
                     fragmentTransaction.commit()
                 }
                 .setNegativeButton("Удалить") { dialog, which ->
@@ -69,6 +69,13 @@ class AdapterProd(private val dataList: List<ProductEntity>) : RecyclerView.Adap
 
                     CoroutineScope(Dispatchers.IO).launch {
                         db.ProductDao().deleteProd(item.id.toString())
+
+                        val fragmentManager = (holder.itemView.context as AppCompatActivity).supportFragmentManager
+                        val fragmentTransaction = fragmentManager.beginTransaction()
+                        val newFragment = AdminWindowProduct()
+                        fragmentTransaction.replace(R.id.container, newFragment)
+                        fragmentTransaction.addToBackStack(null)
+                        fragmentTransaction.commit()
                     }
                 }
                 .setNeutralButton("Отмена") { dialog, which ->
