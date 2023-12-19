@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                     else
                     {
                         runOnUiThread {
-                            message(this@MainActivity, text = "Простой смертный!")
+                           startActivity(Intent(this, UserMainActivity::class.java))
                         }
                     }
                 }

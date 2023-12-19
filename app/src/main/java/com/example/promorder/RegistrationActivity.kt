@@ -37,7 +37,7 @@ class RegistrationActivity : AppCompatActivity() {
                             nameorg = nameorg.text.toString(),
                             inn = inn.text.toString(),
                             ogrn = ogrn.text.toString(),
-                            role = 0
+                            role = 1
                         )
                     )
                     startActivity(Intent(this@RegistrationActivity, MainActivity::class.java))
