@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.promorder.room.DatabaseProvider
@@ -23,6 +24,7 @@ class UserOrderWindow : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_user_order_window, container, false)
         db = DatabaseProvider.getDatabase(requireContext())
+        val infoUserOrd: TextView = view.findViewById(R.id.infoUserOrd)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.recOrdUser)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -31,6 +33,11 @@ class UserOrderWindow : Fragment() {
             withContext(Dispatchers.Main) {
                 val adapter = AdapterOrdUser(selectOrdList)
                 recyclerView.adapter = adapter
+                if (adapter.itemCount == 0) {
+                    infoUserOrd.visibility = View.VISIBLE
+                } else {
+                    infoUserOrd.visibility = View.GONE
+                }
             }
         }
         return view

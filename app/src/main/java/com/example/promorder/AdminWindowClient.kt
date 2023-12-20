@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.promorder.room.DatabaseProvider
@@ -26,6 +27,8 @@ class AdminWindowClient : Fragment() {
 
         db = DatabaseProvider.getDatabase(requireContext())
 
+        val infoadminclient: TextView = view.findViewById(R.id.infoadminclient)
+
         val recyclerView: RecyclerView = view.findViewById(R.id.recClient)
         recyclerView.layoutManager = LinearLayoutManager(context)
         GlobalScope.launch(Dispatchers.IO) {
@@ -33,6 +36,11 @@ class AdminWindowClient : Fragment() {
             withContext(Dispatchers.Main) {
                 val adapter = AdapterUser(selectClientList)
                 recyclerView.adapter = adapter
+                if (adapter.itemCount == 0) {
+                    infoadminclient.visibility = View.VISIBLE
+                } else {
+                    infoadminclient.visibility = View.GONE
+                }
             }
         }
         return view

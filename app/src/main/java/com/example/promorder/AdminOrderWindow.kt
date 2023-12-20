@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.promorder.room.DatabaseProvider
@@ -25,7 +27,7 @@ class AdminOrderWindow : Fragment() {
         val view = inflater.inflate(R.layout.fragment_admin_order_window, container, false)
 
          db = DatabaseProvider.getDatabase(requireContext())
-
+        val infoadminord: TextView = view.findViewById(R.id.infoadminord)
          val recyclerView: RecyclerView = view.findViewById(R.id.recOrderAdmin)
          recyclerView.layoutManager = LinearLayoutManager(context)
          GlobalScope.launch(Dispatchers.IO) {
@@ -33,6 +35,11 @@ class AdminOrderWindow : Fragment() {
              withContext(Dispatchers.Main) {
                  val adapter = AdapterOrderAdmin(selectCurOrdList)
                  recyclerView.adapter = adapter
+                 if (adapter.itemCount == 0) {
+                     infoadminord.visibility = View.VISIBLE
+                 } else {
+                     infoadminord.visibility = View.GONE
+                 }
              }
          }
          return view

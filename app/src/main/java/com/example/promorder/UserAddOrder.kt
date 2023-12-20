@@ -24,6 +24,7 @@ import kotlinx.coroutines.launch
 
 class UserAddOrder : Fragment() {
     private lateinit var db: RoomDb
+
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +36,7 @@ class UserAddOrder : Fragment() {
 
         val arguments = arguments
 
+
         val newprodcount: EditText = view.findViewById(R.id.newprodcount)
         newprodcount.setText("1")
         val btnaddNewOrd: Button = view.findViewById(R.id.btnAddNewOrder)
@@ -43,7 +45,8 @@ class UserAddOrder : Fragment() {
         val finalpriceord: TextView = view.findViewById(R.id.finalpriceord)
         val statusorder = "В обработке"
 
-        val sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val sharedPreferences =
+            requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val username = sharedPreferences.getString("username", "") ?: ""
 
         if (arguments != null) {
@@ -52,23 +55,36 @@ class UserAddOrder : Fragment() {
             finalpriceord.setText(arguments.getString("priceprod"))
         }
 
+
+
+
         newprodcount.addTextChangedListener {
-            val count =  newprodcount.text.toString().toInt()
-            val price = newordprice.text.toString().toInt()
+            val countText = newprodcount.text.toString()
+            val count = if (countText.isEmpty()) {
+                newprodcount.setText("1")
+                1
+            } else {
+                maxOf(1, countText.toInt())
+            }
+
+            val priceText = newordprice.text.toString()
+            val price = if (priceText.isEmpty()) 0 else priceText.toInt()
+
             val result = count * price
             finalpriceord.setText(result.toString())
+
         }
         btnaddNewOrd.setOnClickListener {
             lifecycleScope.launch {
-                    db.orderDao().insertOrder(
-                        OrderEntity(
-                            nameproduct = nameordnew.text.toString(),
-                            countproduct = newprodcount.text.toString(),
-                            priceorder = finalpriceord.text.toString(),
-                            iduserord = username.toString(),
-                            statusorder = statusorder.toString()
-                        )
+                db.orderDao().insertOrder(
+                    OrderEntity(
+                        nameproduct = nameordnew.text.toString(),
+                        countproduct = newprodcount.text.toString(),
+                        priceorder = finalpriceord.text.toString(),
+                        iduserord = username.toString(),
+                        statusorder = statusorder.toString()
                     )
+                )
             }
             val newFragment: Fragment = UserWindowProduct()
 
@@ -80,6 +96,7 @@ class UserAddOrder : Fragment() {
 
             transaction.commit()
         }
+
         return view
     }
 

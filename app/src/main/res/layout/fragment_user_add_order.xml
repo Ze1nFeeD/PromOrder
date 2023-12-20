@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:text="Наименование товара:"
         android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,8 +45,8 @@
         android:id="@+id/nameordnew"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         android:text="Товар1"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Цена за еденицу товара"
         android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,8 +67,8 @@
         android:id="@+id/newordprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="1000000Р"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Количество"
         android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,32 +87,11 @@
 
 
     <TextView
-        android:id="@+id/minuscount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="-"
-        android:textSize="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/newprodcount"
-        app:layout_constraintTop_toBottomOf="@+id/newordprice" />
-
-    <TextView
-        android:id="@+id/pluscount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="+"
-        android:textSize="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newordprice" />
-
-    <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="33dp"
         android:text="Итоговая стоимость"
         android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,12 +101,12 @@
         android:id="@+id/finalpriceord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="10000000Р"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pluscount" />
+        app:layout_constraintTop_toBottomOf="@+id/newprodcount" />
 
     <Button
         style="@style/btn"
@@ -143,11 +122,13 @@
 
     <EditText
         android:id="@+id/newprodcount"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/bg"
-        android:inputType="number"
         android:hint="1"
-        app:layout_constraintEnd_toStartOf="@+id/pluscount"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newordprice" />
 </androidx.constraintlayout.widget.ConstraintLayout>

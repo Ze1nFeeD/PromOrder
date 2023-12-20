@@ -2,6 +2,7 @@ package com.example.promorder
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
@@ -36,7 +38,6 @@ class FragProdAdd : Fragment() {
         val nameproduct: EditText = view.findViewById(R.id.nameprodadd)
         val countproduct: EditText = view.findViewById(R.id.countprodadd)
         val priceproduct: EditText = view.findViewById(R.id.priceprodadd)
-
         if (arguments != null) {
             nameproduct.setText(arguments.getString("nameprod"))
             countproduct.setText(arguments.getString("countprod"))
@@ -46,35 +47,67 @@ class FragProdAdd : Fragment() {
 
         btnaddprod.setOnClickListener {
             try {
+                var isValid = true
 
-
-                lifecycleScope.launch {
-                    if (editeModeProd) {
-                        db.ProductDao().updateProd(
-                            nameproduct = nameproduct.text.toString(),
-                            countprod = countproduct.text.toString(),
-                            priceprod = priceproduct.text.toString(),
-                            idprod = arguments!!.getInt("idprod")
-                        )
-                    } else {
-                        db.ProductDao().insertProduct(
-                            ProductEntity(
-                                nameproduct = nameproduct.text.toString(),
-                                countproduct = countproduct.text.toString(),
-                                priceproduct = priceproduct.text.toString()
-                            )
-                        )
-                    }
+                // Проверка на пустое значение и наличие пробелов в названии продукта
+                if (nameproduct.text.toString().isBlank()) {
+                    nameproduct.setBackgroundResource(R.drawable.bg_red_edittext)
+                    Toast.makeText(context,"Поле 'Название продукта' не может быть пустым",Toast.LENGTH_SHORT).show()
+                    isValid = false
+                } else {
+                    nameproduct.setBackgroundResource(R.drawable.bg)
                 }
-                val newFragment: Fragment = AdminWindowProduct()
 
-                val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
-                transaction.replace(
-                    com.example.promorder.R.id.container,
-                    newFragment
-                )
+                // Проверка на пустое значение и отрицательное число в поле "Количество"
+                if (countproduct.text.toString().isBlank() || countproduct.text.toString().toInt() < 0) {
+                    countproduct.setBackgroundResource(R.drawable.bg_red_edittext)
+                    Toast.makeText(context,"Поле 'Количество' не может быть пустым или меньше 1",Toast.LENGTH_SHORT).show()
+                    isValid = false
+                } else {
+                    countproduct.setBackgroundResource(R.drawable.bg)
+                }
 
-                transaction.commit()
+                // Проверка на пустое значение и отрицательное число в поле "Стоимость"
+                if (priceproduct.text.toString().isBlank() || priceproduct.text.toString().toInt() < 0) {
+                    priceproduct.setBackgroundResource(R.drawable.bg_red_edittext)
+                    Toast.makeText(context,"Поле 'Стоимость' не может быть пустым или меньше 1",Toast.LENGTH_SHORT).show()
+                    isValid = false
+                } else {
+                    priceproduct.setBackgroundResource(R.drawable.bg)
+                }
+
+                if (isValid) {
+                    lifecycleScope.launch {
+                        if (editeModeProd) {
+                            db.ProductDao().updateProd(
+                                nameproduct = nameproduct.text.toString(),
+                                countprod = countproduct.text.toString(),
+                                priceprod = priceproduct.text.toString(),
+                                idprod = arguments!!.getInt("idprod")
+                            )
+                        } else {
+                            db.ProductDao().insertProduct(
+                                ProductEntity(
+                                    nameproduct = nameproduct.text.toString(),
+                                    countproduct = countproduct.text.toString(),
+                                    priceproduct = priceproduct.text.toString()
+                                )
+                            )
+                        }
+                    }
+                    val newFragment: Fragment = AdminWindowProduct()
+
+                    val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+                    transaction.replace(
+                        com.example.promorder.R.id.container,
+                        newFragment
+                    )
+
+                    transaction.commit()
+                } else {
+                    Toast.makeText(context,"Ошибка",Toast.LENGTH_SHORT).show()
+                }
+
             }
             catch (e: Exception)
             {

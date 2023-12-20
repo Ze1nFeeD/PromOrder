@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +29,7 @@ class AdminWindowProduct : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_admin_window_product, container, false)
         db = DatabaseProvider.getDatabase(requireContext())
-
+        val infoadminprod:TextView = view.findViewById(R.id.infoadminprod)
         val recyclerView: RecyclerView = view.findViewById(R.id.recProd)
         recyclerView.layoutManager = LinearLayoutManager(context)
         GlobalScope.launch(Dispatchers.IO) {
@@ -35,6 +37,11 @@ class AdminWindowProduct : Fragment() {
             withContext(Dispatchers.Main) {
                 val adapter = AdapterProd(selectProdList)
                 recyclerView.adapter = adapter
+                if (adapter.itemCount == 0) {
+                    infoadminprod.visibility = View.VISIBLE
+                } else {
+                    infoadminprod.visibility = View.GONE
+                }
             }
         }
 
