@@ -29,7 +29,7 @@ class AdapterUser (private val userList: List<UserEntity>) : RecyclerView.Adapte
         private val ogrnTextView: TextView = itemView.findViewById(R.id.ogrn)
 
         fun bind(enterprise: UserEntity) {
-            nameTextView.text = enterprise.name
+            nameTextView.text = enterprise.nameorg
             innTextView.text = enterprise.inn
             ogrnTextView.text = enterprise.ogrn
         }
