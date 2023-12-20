@@ -9,7 +9,7 @@ data class OrderEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "nameorder") val nameproduct: String,
     @ColumnInfo(name = "countorder") val countproduct: String,
-    @ColumnInfo(name = "priceorder") val priceproduct: String,
+    @ColumnInfo(name = "priceorder") val priceorder: String,
     @ColumnInfo(name = "statusorder") val statusorder: String,
     @ColumnInfo(name = "iduserord") val iduserord: String,
     )

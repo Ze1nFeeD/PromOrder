@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 class AdapterProdUser (private val dataList: List<ProductEntity>) : RecyclerView.Adapter<AdapterProdUser.ViewHolder>() {
     private lateinit var db: RoomDb
 
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nameprod: TextView = view.findViewById(R.id.nameproduser)
         val countprod: TextView = view.findViewById(R.id.countproduser)
@@ -44,6 +45,26 @@ class AdapterProdUser (private val dataList: List<ProductEntity>) : RecyclerView
         holder.countprod.text = data.countproduct
         holder.priceprod.text = data.priceproduct
 
+        holder.btnAddOrder.setOnClickListener {
+            val item = dataList[position]
+
+            val fragmentManager = (holder.itemView.context as AppCompatActivity).supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            val newFragment = UserAddOrder()
+
+            val args = Bundle()
+
+            args.putInt("idprod", item.id)
+            args.putString("nameprod", item.nameproduct.toString())
+            args.putString("countprod", item.countproduct.toString())
+            args.putString("priceprod", item.priceproduct.toString())
+
+            newFragment.arguments = args
+
+            fragmentTransaction.replace(R.id.containerUser, newFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
     }
 
     override fun getItemCount(): Int {

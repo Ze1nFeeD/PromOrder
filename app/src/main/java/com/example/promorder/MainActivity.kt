@@ -46,7 +46,11 @@ class MainActivity : AppCompatActivity() {
                     else
                     {
                         runOnUiThread {
-                           startActivity(Intent(this, UserMainActivity::class.java))
+                            val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                            val editor = sharedPreferences.edit()
+                            editor.putString("username", username.text.toString())
+                            editor.apply()
+                            startActivity(Intent(this, UserMainActivity::class.java))
                         }
                     }
                 }
