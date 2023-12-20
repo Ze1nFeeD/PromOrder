@@ -16,4 +16,7 @@ interface UserDao {
 fun select(username: String, password: String):List<UserEntity>
 @Query("SELECT * FROM users")
 fun selectProd():List<UserEntity>
+
+@Query("SELECT * FROM users WHERE role=1")
+fun selectCLient():List<UserEntity>
 }

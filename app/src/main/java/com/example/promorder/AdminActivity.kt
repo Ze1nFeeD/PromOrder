@@ -33,7 +33,7 @@ class AdminActivity : AppCompatActivity() {
                     true
                 }
                 R.id.client -> {
-                    Toast.makeText(this,"Клиенты",Toast.LENGTH_SHORT).show()
+                    loadFragment(AdminWindowClient())
                     true
                 }
                 else -> false
