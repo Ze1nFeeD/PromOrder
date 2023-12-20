@@ -58,6 +58,13 @@ class AdapterOrderAdmin (private val orders: List<OrderEntity>) : RecyclerView.A
                     status = "Отказ",
                     idord = order.id
                 )
+                val fragmentManager = (holder.itemView.context as AppCompatActivity).supportFragmentManager
+                val fragmentTransaction = fragmentManager.beginTransaction()
+                val newFragment = AdminOrderWindow()
+
+                fragmentTransaction.replace(R.id.container, newFragment)
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.commit()
             }
         }
     }

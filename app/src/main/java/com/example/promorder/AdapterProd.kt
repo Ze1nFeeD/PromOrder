@@ -26,6 +26,7 @@ class AdapterProd(private val dataList: List<ProductEntity>) : RecyclerView.Adap
         val countprod: TextView = view.findViewById(R.id.countprod)
         val priceprod: TextView = view.findViewById(R.id.priceprod)
 
+
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterProd.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.itemrecycleprod, parent, false)

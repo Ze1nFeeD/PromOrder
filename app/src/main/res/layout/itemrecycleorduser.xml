@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -31,25 +32,45 @@
 
             <TextView
                 android:id="@+id/countorduser"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="20шт"
+                android:text="20"
                 android:textColor="@color/grey"
                 android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/nameorduser"
-              />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameorduser" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="32dp"
+                android:text="шт"
+                android:textColor="@color/grey"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/countorduser"
+                app:layout_constraintTop_toBottomOf="@+id/nameorduser" />
 
             <TextView
                 android:id="@+id/priceorduser"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="sans-serif-black"
-                android:text="180000Р"
+                android:text="180000"
                 android:textSize="17dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/countorduser" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:text="₽"
+                android:textSize="17dp"
+                app:layout_constraintStart_toEndOf="@+id/priceorduser"
                 app:layout_constraintTop_toBottomOf="@+id/countorduser" />
 
             <TextView
@@ -57,6 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
+                android:layout_marginEnd="8dp"
                 android:text="Статус"
                 android:textSize="17dp"
                 app:layout_constraintEnd_toEndOf="parent"

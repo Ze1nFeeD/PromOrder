@@ -32,25 +32,46 @@
 
         <TextView
             android:id="@+id/countordadmin"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="20шт"
+            android:text="20"
             android:textColor="@color/grey"
             android:textSize="15sp"
-            app:layout_constraintTop_toBottomOf="@+id/nameordadmin"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameordadmin" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="32dp"
+            android:text="шт"
+            android:textColor="@color/grey"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/countordadmin"
+            app:layout_constraintTop_toBottomOf="@+id/nameordadmin" />
 
         <TextView
             android:id="@+id/priceordadmin"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-black"
-            android:text="180000Р"
+            android:text="180000"
             android:textSize="17dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/countordadmin" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:text="₽"
+            android:textSize="17dp"
+            app:layout_constraintStart_toEndOf="@+id/priceordadmin"
             app:layout_constraintTop_toBottomOf="@+id/countordadmin" />
 
         <Button

@@ -32,25 +32,44 @@
 
             <TextView
                 android:id="@+id/countproduser"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="20шт"
+                android:text="20"
                 android:textColor="@color/grey"
                 android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/nameproduser"
-                tools:layout_editor_absoluteX="-54dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameproduser" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="32dp"
+                android:text="шт"
+                android:textColor="@color/grey"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/countproduser"
+                app:layout_constraintTop_toBottomOf="@+id/nameproduser" />
+            <TextView
                 android:id="@+id/priceproduser"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="sans-serif-black"
-                android:text="180000Р"
+                android:text="180000"
                 android:textSize="17dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/countproduser" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:text="₽"
+                android:textSize="17dp"
+                app:layout_constraintStart_toEndOf="@+id/priceproduser"
                 app:layout_constraintTop_toBottomOf="@+id/countproduser" />
 
             <Button
