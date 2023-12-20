@@ -29,7 +29,7 @@ class AdminActivity : AppCompatActivity() {
                     true
                 }
                 R.id.order -> {
-                    Toast.makeText(this,"Заказы",Toast.LENGTH_SHORT).show()
+                    loadFragment(AdminOrderWindow())
                     true
                 }
                 R.id.client -> {

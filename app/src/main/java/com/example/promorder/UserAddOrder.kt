@@ -70,7 +70,7 @@ class UserAddOrder : Fragment() {
                         )
                     )
             }
-            val newFragment: Fragment = AdminWindowProduct()
+            val newFragment: Fragment = UserWindowProduct()
 
             val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
             transaction.replace(

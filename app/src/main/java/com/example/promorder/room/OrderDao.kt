@@ -11,4 +11,8 @@ interface OrderDao {
     suspend fun insertOrder(orderEntity: OrderEntity)
     @Query("SELECT * FROM orders")
     fun selectOrders():List<OrderEntity>
+    @Query("SELECT * FROM orders WHERE statusorder ='В обработке'")
+    fun selectCurOrd():List<OrderEntity>
+    @Query("UPDATE orders SET statusorder =:status WHERE id = :idord")
+    suspend fun updateOrd(status: String, idord: Int): Int
 }
