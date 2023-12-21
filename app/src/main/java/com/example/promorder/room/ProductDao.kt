@@ -17,4 +17,6 @@ suspend fun deleteProd(id: String): Int
 
 @Query("UPDATE products SET nameproduct =:nameproduct, countproduct =:countprod,priceproduct =:priceprod WHERE id = :idprod")
 suspend fun updateProd(nameproduct: String,countprod: String, priceprod: String, idprod: Int): Int
+    @Query("UPDATE products SET countproduct =:countproduct WHERE id = :idprod")
+    suspend fun updateCountProd(countproduct: String, idprod: Int): Int
 }

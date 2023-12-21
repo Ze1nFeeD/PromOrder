@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.promorder.room.DatabaseProvider
@@ -29,7 +30,16 @@ class AdminWindowClient : Fragment() {
 
         val infoadminclient: TextView = view.findViewById(R.id.infoadminclient)
 
+        val activity = requireActivity()
+        if (activity is AppCompatActivity) {
+            activity.supportActionBar?.show()
+            activity.supportActionBar?.apply {
+                title = "Клиенты"
+            }
+        }
         val recyclerView: RecyclerView = view.findViewById(R.id.recClient)
+        val itemDecoration = ItemOffsetDecoration(20)
+        recyclerView.addItemDecoration(itemDecoration)
         recyclerView.layoutManager = LinearLayoutManager(context)
         GlobalScope.launch(Dispatchers.IO) {
             val selectClientList = db.userDao().selectCLient()

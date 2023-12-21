@@ -1,6 +1,7 @@
 package com.example.promorder
 
 import android.app.AlertDialog
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -69,5 +70,15 @@ class AdapterProdUser (private val dataList: List<ProductEntity>) : RecyclerView
 
     override fun getItemCount(): Int {
         return dataList.size
+    }
+}
+class ItemOffsetDecoration(private val offset: Int) : RecyclerView.ItemDecoration() {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
+        outRect.set(offset, offset, offset, offset)
     }
 }

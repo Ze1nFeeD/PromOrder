@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
 import com.example.promorder.room.DatabaseProvider
@@ -32,7 +33,10 @@ class FragProdAdd : Fragment() {
         val view = inflater.inflate(R.layout.fragment_frag_prod_add, container, false)
         db = DatabaseProvider.getDatabase(requireContext())
         val btnaddprod: Button = view.findViewById(R.id.btnAddProd)
-
+        val activity = requireActivity()
+        if (activity is AppCompatActivity) {
+            activity.supportActionBar?.hide()
+        }
         var editeModeProd = false
         val arguments = arguments
         val nameproduct: EditText = view.findViewById(R.id.nameprodadd)
@@ -49,7 +53,7 @@ class FragProdAdd : Fragment() {
             try {
                 var isValid = true
 
-                // Проверка на пустое значение и наличие пробелов в названии продукта
+
                 if (nameproduct.text.toString().isBlank()) {
                     nameproduct.setBackgroundResource(R.drawable.bg_red_edittext)
                     Toast.makeText(context,"Поле 'Название продукта' не может быть пустым",Toast.LENGTH_SHORT).show()
@@ -58,7 +62,7 @@ class FragProdAdd : Fragment() {
                     nameproduct.setBackgroundResource(R.drawable.bg)
                 }
 
-                // Проверка на пустое значение и отрицательное число в поле "Количество"
+
                 if (countproduct.text.toString().isBlank() || countproduct.text.toString().toInt() < 0) {
                     countproduct.setBackgroundResource(R.drawable.bg_red_edittext)
                     Toast.makeText(context,"Поле 'Количество' не может быть пустым или меньше 1",Toast.LENGTH_SHORT).show()
@@ -67,7 +71,7 @@ class FragProdAdd : Fragment() {
                     countproduct.setBackgroundResource(R.drawable.bg)
                 }
 
-                // Проверка на пустое значение и отрицательное число в поле "Стоимость"
+
                 if (priceproduct.text.toString().isBlank() || priceproduct.text.toString().toInt() < 0) {
                     priceproduct.setBackgroundResource(R.drawable.bg_red_edittext)
                     Toast.makeText(context,"Поле 'Стоимость' не может быть пустым или меньше 1",Toast.LENGTH_SHORT).show()

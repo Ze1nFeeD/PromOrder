@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.promorder.room.DatabaseProvider
@@ -25,8 +26,17 @@ class UserWindowProduct : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_user_window_product, container, false)
 
         db = DatabaseProvider.getDatabase(requireContext())
+        val activity = requireActivity()
+        if (activity is AppCompatActivity) {
+            activity.supportActionBar?.show()
+            activity.supportActionBar?.apply {
+                title = "Товары"
+            }
+        }
         val infoUserprod:TextView = view.findViewById(R.id.infoUserprod)
         val recyclerView: RecyclerView = view.findViewById(R.id.recProdUser)
+        val itemDecoration = ItemOffsetDecoration(20)
+        recyclerView.addItemDecoration(itemDecoration)
         recyclerView.layoutManager = LinearLayoutManager(context)
         GlobalScope.launch(Dispatchers.IO) {
             val selectProdList = db.ProductDao().selectProducts()

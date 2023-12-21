@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.promorder.room.DatabaseProvider
@@ -26,7 +27,17 @@ class UserOrderWindow : Fragment() {
         db = DatabaseProvider.getDatabase(requireContext())
         val infoUserOrd: TextView = view.findViewById(R.id.infoUserOrd)
 
+        val activity = requireActivity()
+        if (activity is AppCompatActivity) {
+            activity.supportActionBar?.show()
+            activity.supportActionBar?.apply {
+                title = "Заказы"
+            }
+        }
+
         val recyclerView: RecyclerView = view.findViewById(R.id.recOrdUser)
+        val itemDecoration = ItemOffsetDecoration(20)
+        recyclerView.addItemDecoration(itemDecoration)
         recyclerView.layoutManager = LinearLayoutManager(context)
         GlobalScope.launch(Dispatchers.IO) {
             val selectOrdList = db.orderDao().selectOrders()

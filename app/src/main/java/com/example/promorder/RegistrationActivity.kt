@@ -23,7 +23,7 @@ class RegistrationActivity : AppCompatActivity() {
         val nameorg: EditText = findViewById(R.id.nameorg)
         val inn: EditText = findViewById(R.id.inn)
         val ogrn: EditText = findViewById(R.id.ogrn)
-
+        supportActionBar?.hide()
         db = DatabaseProvider.getDatabase(applicationContext)
         val btnReg: Button = findViewById(R.id.btnReg)
 
@@ -55,7 +55,7 @@ class RegistrationActivity : AppCompatActivity() {
             }
 
 
-            if (nameorgText.text.toString().isBlank() || nameorgText.text.toString().contains(" ")) {
+            if (nameorgText.text.toString().isBlank()) {
                 nameorgText.setBackgroundResource(R.drawable.bg_red_edittext)
                 Toast.makeText(applicationContext,"Поле 'Название организации' не может быть пустым",Toast.LENGTH_SHORT).show()
                 isValid = false

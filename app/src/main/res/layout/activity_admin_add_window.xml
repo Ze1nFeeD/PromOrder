@@ -4,82 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragProdAdd">
-
-    <ImageView
-        android:id="@+id/imageView"
+    android:fitsSystemWindows="true"
+    tools:context=".AdminAddWindow">
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/some_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/plus"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="top"
+        android:lineSpacingExtra="-3sp"
+        android:text="Добавление администратора"
+        android:textSize="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/nameprodadd"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+    <ImageView
+        android:id="@+id/client"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/bg"
-        android:hint="Название продукта"
+        android:src="@drawable/user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/some_id" />
 
     <EditText
-        android:id="@+id/countprodadd"
-        android:inputType="number"
+        android:id="@+id/adminname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/bg"
-        android:hint="Количество"
+        android:hint="Введите  логин"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameprodadd" />
+        app:layout_constraintTop_toBottomOf="@+id/client" />
 
     <EditText
-        android:id="@+id/priceprodadd"
+        android:id="@+id/passadmin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:background="@drawable/bg"
+        android:hint="Введите  пароль"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/bg"
-        android:hint="Стоимость"
         app:layout_constraintEnd_toEndOf="parent"
+        android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/countprodadd" />
+        app:layout_constraintTop_toBottomOf="@+id/adminname" />
 
     <Button
-        android:id="@+id/btnAddProd"
+        android:id="@+id/btnRegAdmin"
         style="@style/btn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/blue"
-        android:text="Добавить"
-        android:textSize="20dp"
+        android:text="Зарегестрироваться"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priceprodadd" />
+        app:layout_constraintTop_toBottomOf="@+id/passadmin" />
 
     <Button
+        android:id="@+id/btnCanAdmin"
         style="@style/btn"
-        android:id="@+id/btncanadd"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/blue"
         android:text="Отмена"
-        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAddProd" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRegAdmin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

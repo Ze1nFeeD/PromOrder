@@ -15,4 +15,5 @@ interface OrderDao {
     fun selectCurOrd():List<OrderEntity>
     @Query("UPDATE orders SET statusorder =:status WHERE id = :idord")
     suspend fun updateOrd(status: String, idord: Int): Int
+
 }

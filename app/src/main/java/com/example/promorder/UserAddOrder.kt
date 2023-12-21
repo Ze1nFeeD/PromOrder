@@ -12,11 +12,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
 import com.example.promorder.room.DatabaseProvider
 import com.example.promorder.room.OrderEntity
+import com.example.promorder.room.ProductEntity
 import com.example.promorder.room.RoomDb
 import com.example.promorder.room.UserEntity
 import kotlinx.coroutines.launch
@@ -33,9 +35,12 @@ class UserAddOrder : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_user_add_order, container, false)
         db = DatabaseProvider.getDatabase(requireContext())
-
         val arguments = arguments
 
+        val activity = requireActivity()
+        if (activity is AppCompatActivity) {
+            activity.supportActionBar?.hide()
+        }
 
         val newprodcount: EditText = view.findViewById(R.id.newprodcount)
         newprodcount.setText("1")
@@ -44,7 +49,8 @@ class UserAddOrder : Fragment() {
         val newordprice: TextView = view.findViewById(R.id.newordprice)
         val finalpriceord: TextView = view.findViewById(R.id.finalpriceord)
         val statusorder = "В обработке"
-
+        val idprod = arguments?.getInt("idprod") ?:0
+        val countprod = (arguments?.getString("countprod")).toString().toInt()
         val sharedPreferences =
             requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val username = sharedPreferences.getString("username", "") ?: ""
@@ -64,7 +70,13 @@ class UserAddOrder : Fragment() {
                 newprodcount.setText("1")
                 1
             } else {
-                maxOf(1, countText.toInt())
+                val enteredCount = countText.toInt()
+                if (enteredCount > countprod) {
+                    newprodcount.setText(countprod.toString())
+                    countprod
+                } else {
+                    maxOf(1, enteredCount)
+                }
             }
 
             val priceText = newordprice.text.toString()
@@ -75,6 +87,7 @@ class UserAddOrder : Fragment() {
 
         }
         btnaddNewOrd.setOnClickListener {
+            val countprodf = countprod - newprodcount.text.toString().toInt()
             lifecycleScope.launch {
                 db.orderDao().insertOrder(
                     OrderEntity(
@@ -85,8 +98,13 @@ class UserAddOrder : Fragment() {
                         statusorder = statusorder.toString()
                     )
                 )
+                db.ProductDao().updateCountProd(
+                        countproduct = countprodf.toString(),
+                        idprod = idprod
+                )
             }
             val newFragment: Fragment = UserWindowProduct()
+
 
             val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
             transaction.replace(
@@ -99,5 +117,4 @@ class UserAddOrder : Fragment() {
 
         return view
     }
-
 }

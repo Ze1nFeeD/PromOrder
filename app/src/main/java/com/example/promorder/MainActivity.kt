@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         val username: EditText = findViewById(R.id.username)
         val password: EditText = findViewById(R.id.password)
         val btnEnter: Button = findViewById(R.id.button)
+        supportActionBar?.hide()
         btnEnter.setOnClickListener {
             Thread {
                 val userCur = db.userDao().select(
@@ -40,6 +41,10 @@ class MainActivity : AppCompatActivity() {
                 {
                     if(userCur.first().role == 0) {
                         runOnUiThread {
+                            val sharedPreferencesAd = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                            val editor = sharedPreferencesAd.edit()
+                            editor.putString("username", username.text.toString())
+                            editor.apply()
                           startActivity(Intent(this, AdminActivity::class.java))
                         }
                     }

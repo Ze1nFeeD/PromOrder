@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
     tools:context=".RegistrationActivity">
 
@@ -80,6 +81,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/bg"
         android:hint="Введите ИНН"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameorg" />
@@ -93,6 +95,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/bg"
         android:hint="Введите ОГРН"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inn" />

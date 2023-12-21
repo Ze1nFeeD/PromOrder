@@ -19,4 +19,7 @@ fun selectProd():List<UserEntity>
 
 @Query("SELECT * FROM users WHERE role=1")
 fun selectCLient():List<UserEntity>
+@Query("UPDATE users SET password =:newpass WHERE name=:name")
+fun resPass(name: String,newpass: String): Int
+
 }
