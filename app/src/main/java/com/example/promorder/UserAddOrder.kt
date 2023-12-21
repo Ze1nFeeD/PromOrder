@@ -41,7 +41,7 @@ class UserAddOrder : Fragment() {
         if (activity is AppCompatActivity) {
             activity.supportActionBar?.hide()
         }
-
+        val btnCanAd: Button = view.findViewById(R.id.btnCanNewOrder)
         val newprodcount: EditText = view.findViewById(R.id.newprodcount)
         newprodcount.setText("1")
         val btnaddNewOrd: Button = view.findViewById(R.id.btnAddNewOrder)
@@ -85,6 +85,17 @@ class UserAddOrder : Fragment() {
             val result = count * price
             finalpriceord.setText(result.toString())
 
+        }
+        btnCanAd.setOnClickListener {
+            val newFragment: Fragment = UserWindowProduct()
+
+            val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+            transaction.replace(
+                com.example.promorder.R.id.containerUser,
+                newFragment
+            )
+
+            transaction.commit()
         }
         btnaddNewOrd.setOnClickListener {
             val countprodf = countprod - newprodcount.text.toString().toInt()
