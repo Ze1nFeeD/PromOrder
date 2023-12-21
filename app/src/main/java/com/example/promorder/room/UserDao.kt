@@ -21,5 +21,6 @@ fun selectProd():List<UserEntity>
 fun selectCLient():List<UserEntity>
 @Query("UPDATE users SET password =:newpass WHERE name=:name")
 fun resPass(name: String,newpass: String): Int
-
+@Query("SELECT * FROM users")
+fun selectFind():List<UserEntity>
 }

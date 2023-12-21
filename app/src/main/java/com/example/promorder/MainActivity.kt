@@ -12,6 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import com.example.promorder.room.DatabaseProvider
 import com.example.promorder.room.RoomDb
+import com.example.promorder.room.UserEntity
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -25,8 +26,26 @@ class MainActivity : AppCompatActivity() {
         val password: EditText = findViewById(R.id.password)
         val btnEnter: Button = findViewById(R.id.button)
         supportActionBar?.hide()
+Thread {
+
+    if (db.userDao().selectFind().isEmpty()) {
+        lifecycleScope.launch {
+            db.userDao().insertUser(
+                UserEntity(
+                    name = "0",
+                    password = "0",
+                    nameorg = "0",
+                    inn = "0",
+                    ogrn = "0",
+                    role = 0
+                )
+            )
+        }
+    }
+}.start()
         btnEnter.setOnClickListener {
             Thread {
+
                 val userCur = db.userDao().select(
                     username = username.text.toString(),
                     password = password.text.toString()
